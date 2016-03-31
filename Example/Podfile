@@ -3,6 +3,9 @@ use_frameworks!
 
 target 'Raccoon_Example', :exclusive => true do
   pod 'Raccoon', :path => '../'
+  pod 'Alamofire'
+  pod 'Mantle'
+  pod 'MBProgressHUD'
 end
 
 target 'Raccoon_Tests', :exclusive => true do
