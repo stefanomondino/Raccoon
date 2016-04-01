@@ -10,9 +10,9 @@ import Raccoon
 
 class ListCellViewModel: ViewModel {
     var title:String!
-    convenience init(model:String!) {
+    convenience init(model:Track!) {
         self.init()
-        self.title = model
+        self.title = model.trackName
     }
     override func cellIdentifier() -> String! {
         return "ListCollectionViewCell"

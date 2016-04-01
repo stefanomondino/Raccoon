@@ -18,7 +18,7 @@ class ListViewModel: ViewModel {
         super.init()
         
         self.reloadAction = Action.init({ (_) -> SignalProducer<[[AnyObject]?], NSError> in
-            return SignalProducer(value: [["1","2","3","4"]])
+            return RESTManager.sharedInstance.searchWithString("Queen").map({return [$0]})
         })
         self.reloadAction?.apply(nil).start()
         
@@ -30,6 +30,6 @@ class ListViewModel: ViewModel {
         return self.viewModelAtIndexPath(indexPath).cellIdentifier()
     }
     override func cellViewModelFromModel(model: AnyObject!) -> ViewModel! {
-        return ListCellViewModel(model: model as! String)
+        return ListCellViewModel(model: model as! Track)
     }
 }
