@@ -15,6 +15,7 @@ class ListViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBarHidden = true
         self.bindViewModelToCollectionView(viewModel, collectionView: collectionView)
         self.collectionView.delegate = self
     }
