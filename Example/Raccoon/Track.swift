@@ -9,12 +9,18 @@
 import Foundation
 import Mantle
 class Track:MTLModel, MTLJSONSerializing {
-    var trackName:String?
+    
     var id:String?
+    var trackName:String?
+    var collectionName:String?
+    var artwork:String?
+    
     class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
         return [
             "id":"id",
-            "trackName":"trackName"
+            "trackName":"trackName",
+            "collectionName":"collectionName",
+            "artwork":"artworkUrl100"
         ]
     }
 }

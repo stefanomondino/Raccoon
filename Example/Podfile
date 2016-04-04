@@ -6,6 +6,7 @@ target 'Raccoon_Example', :exclusive => true do
   pod 'Alamofire'
   pod 'Mantle'
   pod 'MBProgressHUD'
+  pod 'SDWebImage'
 end
 
 target 'Raccoon_Tests', :exclusive => true do

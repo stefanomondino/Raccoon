@@ -8,7 +8,7 @@
         <!--List View Controller-->
         <scene sceneID="W6R-RE-a1R">
             <objects>
-                <viewController id="0dy-WC-G36" customClass="ListViewController" customModule="Raccoon_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="0dy-WC-G36" customClass="ListViewController" customModule="Raccoon_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KRd-5X-yhd"/>
                         <viewControllerLayoutGuide type="bottom" id="zEc-Ih-If3"/>
@@ -17,10 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Pbh-y5-rwQ">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Pbh-y5-rwQ">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="v5B-lY-Isg">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="v5B-lY-Isg">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -28,7 +28,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="94l-XE-RLD">
-                                        <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -50,11 +50,62 @@
                     <navigationItem key="navigationItem" id="mAS-Et-voe"/>
                     <connections>
                         <outlet property="collectionView" destination="Pbh-y5-rwQ" id="Cqd-uu-3Zk"/>
+                        <segue destination="M5V-9n-YnT" kind="show" identifier="detailSegue" id="jee-2o-oga"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CdJ-hI-6xS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="705" y="-807"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="cKr-dM-G19">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="M5V-9n-YnT" customClass="DetailViewController" customModule="Raccoon_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="f3n-JD-vWt"/>
+                        <viewControllerLayoutGuide type="bottom" id="gs6-Nw-ZIh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="F3b-2o-LUS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="anu-mj-U6t">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FiA-iz-WcZ">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="MIk-db-W2d">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="anu-mj-U6t" secondAttribute="trailing" id="RJd-De-ATP"/>
+                            <constraint firstItem="anu-mj-U6t" firstAttribute="leading" secondItem="F3b-2o-LUS" secondAttribute="leading" id="Wvk-ki-9dw"/>
+                            <constraint firstItem="gs6-Nw-ZIh" firstAttribute="top" secondItem="anu-mj-U6t" secondAttribute="bottom" id="aZa-1y-X7d"/>
+                            <constraint firstItem="anu-mj-U6t" firstAttribute="top" secondItem="f3n-JD-vWt" secondAttribute="bottom" id="hXZ-Sn-fx3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="anu-mj-U6t" id="VWs-Lw-ShI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hho-h8-x54" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1435" y="-807"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cOA-gA-ldI">

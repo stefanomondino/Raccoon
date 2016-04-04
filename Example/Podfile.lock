@@ -18,12 +18,16 @@ PODS:
     - ReactiveCocoa/Core
     - Result (~> 2.0)
   - Result (2.0.0)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
 
 DEPENDENCIES:
   - Alamofire
   - Mantle
   - MBProgressHUD
   - Raccoon (from `../`)
+  - SDWebImage
 
 EXTERNAL SOURCES:
   Raccoon:
@@ -36,5 +40,6 @@ SPEC CHECKSUMS:
   Raccoon: a72cb50b880133ff4f3a677e82e85e99030f4349
   ReactiveCocoa: d70004d7a366a7b8e87e60ce2347182c77701949
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
 
 COCOAPODS: 0.39.0

@@ -9,6 +9,18 @@
 import Foundation
 import UIKit
 import ReactiveCocoa
+
+
+public struct SegueParameters {
+    public var segueIdentifier:String!
+    public var viewModel:ViewModel?
+    
+    public init(segueIdentifier:String!, viewModel:ViewModel?) {
+        self.segueIdentifier = segueIdentifier
+        self.viewModel = viewModel
+    }
+}
+
 extension UICollectionReusableView {
     
     public func setViewModel(viewModel:ViewModel?) {
@@ -42,8 +54,31 @@ extension ViewModel: UICollectionViewDataSource {
 }
 
 
+
+
 extension UIViewController {
 
+    
+    public func performSegueWithIdentifier(identifier:String!, viewModel:ViewModel?) {
+        let signalProducer:SignalProducer<UIViewController,NSError>  = self.rac_signalForSelector(#selector(prepareForSegue))
+            .toSignalProducer()
+            .take(1)
+            .map({
+                let segue:UIStoryboardSegue = ($0! as! RACTuple).first as! UIStoryboardSegue
+                return segue.destinationViewController as! UIViewController
+                })
+        
+        signalProducer.startWithNext { (viewController) in
+            viewController.setViewModel(viewModel)
+        }
+        
+        
+        
+        
+        
+        self .performSegueWithIdentifier(identifier, sender: self)
+    }
+    
     public func bindViewModelToCollectionView(viewModel:ViewModel!, collectionView:UICollectionView!) {
         collectionView.dataSource = viewModel
         viewModel.registerCellsForCollectionView(collectionView)
@@ -62,6 +97,7 @@ extension UIViewController {
             collectionView .reloadData()
         }
     }
+    public func setViewModel(viewModel:ViewModel?){}
     public func receivedError(error:NSError) {}
     public func showLoader() {}
     public func hideLoader() {}
