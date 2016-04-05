@@ -14,14 +14,23 @@ import Result
 class ListViewModel: ViewModel {
     var scheduler:Disposable?
     var nextAction:Action<AnyObject, SegueParameters!, NoError>!
-    
+    let searchString:MutableProperty<String?> = MutableProperty(nil)
     override init () {
         super.init()
         
-        self.reloadAction = Action.init({ (_) -> SignalProducer<[[AnyObject]?], NSError> in
-            return RESTManager.sharedInstance.searchWithString("Franz Ferdinand").map({return [$0]})
+        self.reloadAction = Action({[unowned self] (string) -> SignalProducer<[[AnyObject]?], NSError> in
+            return RESTManager.sharedInstance
+                .searchWithString(string as? String)
+                .map({return [$0]})
+            
         })
-        self.reloadAction?.apply(nil).start()
+        
+        self.searchString.producer.throttle(0.5, onScheduler:QueueScheduler.mainQueueScheduler).startWithNext {[unowned self] (string) in
+            print(string)
+            self.reloadAction?.apply(string).start()
+        }
+        
+        self.reloadAction?.apply("queen").start()
         
         self.nextAction = Action ({ [unowned self] (value:AnyObject) in
             
@@ -29,7 +38,7 @@ class ListViewModel: ViewModel {
                 let indexPath = value as! NSIndexPath
                 let item = self.modelAtIndexPath(indexPath) as? Track
 //                print(item)
-                let segueParameters = SegueParameters(segueIdentifier:"detailSegue",viewModel:DetailViewModel(detail:item!))
+                let segueParameters = SegueParameters(segueIdentifier:"detailSegue",viewModel:DetailViewModel(trackDetail:item!))
                 return SignalProducer.init(value:segueParameters)
             }
             return SignalProducer.init(value:nil)

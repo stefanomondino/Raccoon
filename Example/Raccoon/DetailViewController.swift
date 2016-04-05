@@ -18,18 +18,23 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.title = "Raccoon"
-        //self.bindViewModelToCollectionView(viewModel, collectionView: collectionView)
+        self.title = myViewModel?.trackDetail.trackName
         self.collectionView.delegate = self
         self.bindViewModelToCollectionView(myViewModel, collectionView: self.collectionView)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(collectionView.frame.size.width, 90)
+        
+        if indexPath.indexAtPosition(0) == 0{
+            return CGSizeMake(collectionView.frame.size.width, 100)
+        }else if indexPath.indexAtPosition(0) == 5{
+            return CGSizeMake(collectionView.frame.size.width, 60)
+        }else{
+            return CGSizeMake(collectionView.frame.size.width, 40)
+        }
     }
     override func setViewModel(viewModel: ViewModel?) {
-        self.myViewModel = viewModel as DetailViewModel
-        
+        self.myViewModel = viewModel as? DetailViewModel
     }
+    
 }

@@ -14,13 +14,24 @@ class Track:MTLModel, MTLJSONSerializing {
     var trackName:String?
     var collectionName:String?
     var artwork:String?
+    var previewUrl:String?
+    var trackViewUrl:String?
+    var trackPrice:NSNumber?
+    var albumPrice:NSNumber?
+    var currency:String?
+    
     
     class func JSONKeyPathsByPropertyKey() -> [NSObject : AnyObject]! {
         return [
             "id":"id",
             "trackName":"trackName",
             "collectionName":"collectionName",
-            "artwork":"artworkUrl100"
+            "artwork":"artworkUrl100",
+            "previewUrl":"previewUrl",
+            "trackViewUrl":"trackViewUrl",
+            "trackPrice":"trackPrice",
+            "albumPrice":"collectionPrice",
+            "currency":"currency"
         ]
     }
 }

@@ -12,23 +12,49 @@ import Result
 
 class DetailViewModel: ViewModel {
     
-    init(detail:Track) {
+    var trackDetail:Track!
+    var nextAction:Action<AnyObject?, SegueParameters!, NoError>!
+    
+    init(trackDetail:Track) {
         super.init()
-        print(detail)
+        self.trackDetail = trackDetail
         
         self.reloadAction = Action.init({ (_) -> SignalProducer<[[AnyObject]?], NSError> in
-            return RESTManager.sharedInstance.searchWithString("Franz Ferdinand").map({return [$0]})
+            let headerViewModel = ListCellViewModel(model: self.trackDetail)
+            let album = DetailCellViewModel(key: "Album: ", value: self.trackDetail.collectionName)
+            let aPrice = DetailCellViewModel(key: "Album Price: ", value: String(self.trackDetail.albumPrice!) + " " + self.trackDetail.currency!)
+            let track = DetailCellViewModel(key: "Track: ", value: self.trackDetail.trackName)
+            let tPrice = DetailCellViewModel(key: "Track Price: ", value: String(self.trackDetail.trackPrice!) + " " + self.trackDetail.currency!)
+            
+            let tempString: String = self.trackDetail.trackViewUrl!
+            //let newUrl = tempString.stringByReplacingOccurrencesOfString("https://", withString: "itms://")
+            print(tempString)
+            
+            let preview = PreviewCellViewModel(url: NSURL(string: tempString)!, action: (self.nextAction))
+            
+            return SignalProducer(value: [[headerViewModel], [album], [aPrice], [track], [tPrice], [preview]])
+        })
+        
+        
+        
+        self.nextAction = Action ({ [unowned self] (value:AnyObject?) in
+            if (value is NSURL) {
+                UIApplication.sharedApplication().openURL(value as! NSURL)
+                return SignalProducer.init(value:nil)
+            }
+
+            return SignalProducer.init(value:nil)
         })
         self.reloadAction?.apply(nil).start()
     }
     
     override func cellIdentifiers() -> [String]! {
-        return ["ListCollectionViewCell"]
+        return ["ListCollectionViewCell", "DetailCollectionViewCell", "PreviewCollectionViewCell"]
     }
     override func cellIdentifierAtIndexPath(indexPath: NSIndexPath) -> String! {
         return self.viewModelAtIndexPath(indexPath).cellIdentifier()
     }
     override func cellViewModelFromModel(model: AnyObject!) -> ViewModel! {
-        return ListCellViewModel(model: model as! Track)
+        return model as! ViewModel
     }
 }

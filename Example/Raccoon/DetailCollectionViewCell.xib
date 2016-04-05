@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="sEG-th-ff1" customClass="DetailCollectionViewCell" customModule="Raccoon_Example" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="386" height="40"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="386" height="40"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UE3-jz-tBQ">
+                        <rect key="frame" x="15" y="0.0" width="38" height="40"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zww-vG-Mp8">
+                        <rect key="frame" x="58" y="0.0" width="313" height="40"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.031372549019607843" green="0.5725490196078431" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Zww-vG-Mp8" secondAttribute="trailing" constant="15" id="9Cq-ek-d6p"/>
+                <constraint firstItem="UE3-jz-tBQ" firstAttribute="top" secondItem="sEG-th-ff1" secondAttribute="top" id="AYC-pI-pFA"/>
+                <constraint firstAttribute="bottom" secondItem="UE3-jz-tBQ" secondAttribute="bottom" id="M7Q-mR-YWd"/>
+                <constraint firstAttribute="bottom" secondItem="Zww-vG-Mp8" secondAttribute="bottom" id="eeR-2F-7ag"/>
+                <constraint firstItem="Zww-vG-Mp8" firstAttribute="top" secondItem="sEG-th-ff1" secondAttribute="top" id="gdN-at-sX6"/>
+                <constraint firstItem="Zww-vG-Mp8" firstAttribute="leading" secondItem="UE3-jz-tBQ" secondAttribute="trailing" constant="5" id="kpk-QE-3S6"/>
+                <constraint firstItem="UE3-jz-tBQ" firstAttribute="leading" secondItem="sEG-th-ff1" secondAttribute="leading" constant="15" id="svK-yn-yc2"/>
+            </constraints>
+            <size key="customSize" width="386" height="85"/>
+            <connections>
+                <outlet property="lbl_description" destination="Zww-vG-Mp8" id="kjk-iy-IYO"/>
+                <outlet property="lbl_title" destination="UE3-jz-tBQ" id="BGm-aY-E3V"/>
+            </connections>
+            <point key="canvasLocation" x="358" y="156"/>
+        </collectionViewCell>
+    </objects>
+</document>

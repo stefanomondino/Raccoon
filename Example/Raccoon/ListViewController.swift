@@ -8,11 +8,13 @@
 
 import UIKit
 import Raccoon
-
+import ReactiveCocoa
+import Result
 
 class ListViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     let viewModel = ListViewModel()
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchBar: UITextField?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,12 +22,15 @@ class ListViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         self.title = "Raccoon"
         self.bindViewModelToCollectionView(viewModel, collectionView: collectionView)
         self.collectionView.delegate = self
+        self.collectionView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0)
+        //self.viewModel.searchString <~ self.searchBar?.rac_textSignal().toSignalProducer().map{$0 as! String}
+        
+        self.viewModel.searchString <~ self.searchBar!.rac_textSignal().toSignalProducer()
+            .flatMapError({ (error) -> SignalProducer<AnyObject?, NoError> in return .empty })
+            .map{$0 as? String}
         
         self.viewModel.nextAction.values.observeNext{[unowned self] (segueParameters:SegueParameters!) in
-            //print("tuple: " + String(tuple))
-            //      if tuple != nil {
             self.performSegueWithIdentifier(segueParameters.segueIdentifier, viewModel:segueParameters.viewModel )
-            //      }
         }
     }
     

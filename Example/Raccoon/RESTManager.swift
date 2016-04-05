@@ -24,8 +24,6 @@ class RESTManager {
                 do {
                     let tracks = try MTLJSONAdapter.modelsOfClass(Track.self, fromJSONArray: results) as! [Track]
                     
-                    print("OK")
-                    
                     observer.sendNext(tracks)
                     observer.sendCompleted()
                 } catch let error {
