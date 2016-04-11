@@ -19,11 +19,9 @@ class RESTManager {
         return SignalProducer {observer, disposable in
            let request = Alamofire.request(.GET, self.kBaseURL+"search" , parameters: ["term":search ?? ""], encoding:.URL).responseJSON{ response in
                 let JSON = response.result.value as? [String : AnyObject] ?? ["":""]
-                
                 let results = JSON!["results"] as? [AnyObject] ?? []
                 do {
                     let tracks = try MTLJSONAdapter.modelsOfClass(Track.self, fromJSONArray: results) as! [Track]
-                    
                     observer.sendNext(tracks)
                     observer.sendCompleted()
                 } catch let error {

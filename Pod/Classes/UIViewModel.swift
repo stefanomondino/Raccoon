@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import ReactiveCocoa
-
+import Result
 
 public struct SegueParameters {
     public var segueIdentifier:String!
@@ -66,7 +66,13 @@ extension UIViewController {
             .map({
                 let segue:UIStoryboardSegue = ($0! as! RACTuple).first as! UIStoryboardSegue
                 return segue.destinationViewController as! UIViewController
-                })
+            }).flatMap(FlattenStrategy.Latest) { (viewController:UIViewController) -> SignalProducer<UIViewController, NSError> in
+            if (viewController is UINavigationController) {
+                let vc = (viewController as! UINavigationController).topViewController
+                return SignalProducer<UIViewController, NSError>(value:vc!)
+            }
+            return SignalProducer<UIViewController, NSError>(value:viewController)
+        }
         
         signalProducer.startWithNext { (viewController) in
             viewController.setViewModel(viewModel)
