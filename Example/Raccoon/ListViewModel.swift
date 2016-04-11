@@ -24,13 +24,16 @@ class ListViewModel: ViewModel {
                 .map({return [$0]})
             
         })
+        self.searchString.value = "Raccoon"
         
+        var lastDisposable:Disposable?
         self.searchString.producer.throttle(0.5, onScheduler:QueueScheduler.mainQueueScheduler).startWithNext {[unowned self] (string) in
             print(string)
-            self.reloadAction?.apply(string).start()
+            if (lastDisposable != nil) {lastDisposable!.dispose();}
+            lastDisposable = self.reloadAction?.apply(string).start()
         }
         
-        self.reloadAction?.apply("queen").start()
+        
         
         self.nextAction = Action ({ [unowned self] (value:AnyObject) in
             

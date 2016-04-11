@@ -17,7 +17,7 @@ class RESTManager {
     let kBaseURL = "https://itunes.apple.com/"
     func searchWithString(search:String?) -> SignalProducer<[AnyObject]?,NSError> {
         return SignalProducer {observer, disposable in
-            Alamofire.request(.GET, self.kBaseURL+"search" , parameters: ["term":search ?? ""], encoding:.URL).responseJSON{ response in
+           let request = Alamofire.request(.GET, self.kBaseURL+"search" , parameters: ["term":search ?? ""], encoding:.URL).responseJSON{ response in
                 let JSON = response.result.value as? [String : AnyObject] ?? ["":""]
                 
                 let results = JSON!["results"] as? [AnyObject] ?? []
@@ -30,7 +30,9 @@ class RESTManager {
                     observer.sendFailed(error as NSError)
                 }
             }
-            
+         disposable.addDisposable({ 
+            request.cancel()
+         })
         }
     }
     

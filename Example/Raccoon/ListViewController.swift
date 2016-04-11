@@ -23,11 +23,18 @@ class ListViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         self.bindViewModelToCollectionView(viewModel, collectionView: collectionView)
         self.collectionView.delegate = self
         self.collectionView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0)
-        //self.viewModel.searchString <~ self.searchBar?.rac_textSignal().toSignalProducer().map{$0 as! String}
         
-        self.viewModel.searchString <~ self.searchBar!.rac_textSignal().toSignalProducer()
+        
+        self.viewModel.searchString.producer
+            .skipRepeats{$0 == $1}
+            .startWithNext{[unowned self] in self.searchBar!.text = $0}
+        
+        self.viewModel.searchString <~ self.searchBar!.rac_textSignal()
+            .toSignalProducer()
             .flatMapError({ (error) -> SignalProducer<AnyObject?, NoError> in return .empty })
             .map{$0 as? String}
+            .skipRepeats{$0 == $1}
+       
         
         self.viewModel.nextAction.values.observeNext{[unowned self] (segueParameters:SegueParameters!) in
             self.performSegueWithIdentifier(segueParameters.segueIdentifier, viewModel:segueParameters.viewModel )
