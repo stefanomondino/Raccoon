@@ -41,7 +41,8 @@ class ListViewModel: ViewModel {
                 let indexPath = value as! NSIndexPath
                 let item = self.modelAtIndexPath(indexPath) as? Track
 //                print(item)
-                let segueParameters = SegueParameters(segueIdentifier:"detailSegue",viewModel:DetailViewModel(trackDetail:item!))
+                //let segueParameters = SegueParameters(segueIdentifier:"detailSegue",viewModel:DetailViewModel(trackDetail:item!))
+                let segueParameters = SegueParameters(segueIdentifier:"stackDetail",viewModel:DetailModel(trackDetail:item!))
                 return SignalProducer.init(value:segueParameters)
             }
             return SignalProducer.init(value:nil)

@@ -21,7 +21,7 @@ public struct SegueParameters {
     }
 }
 
-extension UICollectionReusableView {
+extension UIView {
     
     public func setViewModel(viewModel:ViewModel?) {
         
@@ -101,6 +101,50 @@ extension UIViewController {
             collectionView .reloadData()
         }
     }
+    
+    @available(iOS 9.0, *)
+    public func bindViewModelToStackView(viewModel:ViewModel!, stackView:UIStackView!) {
+        
+        viewModel!.sectionedDataSource.producer.startWithNext { (model:[[AnyObject]?]) in
+            
+//            model.forEach({ (model) in
+//                
+//                let vm = viewModel!.listViewModelFromModel(model)!
+//                let view:UIView = NSBundle.mainBundle().loadNibNamed(vm.listIdentifier(), owner: nil, options: nil) as! UIView
+//                view.setViewModel(vm)
+//                stackView.addArrangedSubview(view)
+//            })
+            
+            model.first!?.forEach({ (model) in
+                
+                    let vm = viewModel!.listViewModelFromModel(model)!
+                    let view:UIView = NSBundle.mainBundle().loadNibNamed(vm.listIdentifier(), owner: nil, options: nil).first as! UIView
+                    view.setViewModel(vm)
+                    stackView.addArrangedSubview(view)
+                
+                
+            })
+        
+        
+        }//        viewModel.dataSource = viewModel
+//        viewModel.registerCellsForCollectionView(stackView)
+//        viewModel.reloadAction?.errors.observeNext({[unowned self] (error) in
+//            self.receivedError(error)
+//            })
+//        viewModel.reloadAction?.executing.producer.startWithNext({[unowned self] (show) in
+//            if (show) {
+//                self.showLoader()
+//            }
+//            else {
+//                self.hideLoader()
+//            }
+//            })
+//        viewModel.sectionedDataSource.producer.startWithNext { (_) in
+//            stackView.reloadData()
+//        }
+    }
+    
+    
     public func setViewModel(viewModel:ViewModel?){}
     public func receivedError(error:NSError) {}
     public func showLoader() {}

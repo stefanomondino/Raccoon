@@ -63,6 +63,7 @@
                         <outlet property="collectionView" destination="Pbh-y5-rwQ" id="Cqd-uu-3Zk"/>
                         <outlet property="searchBar" destination="Z2b-PH-g24" id="oKG-nc-Fdx"/>
                         <segue destination="M5V-9n-YnT" kind="show" identifier="detailSegue" id="jee-2o-oga"/>
+                        <segue destination="sNr-KW-RXC" kind="show" identifier="stackDetail" id="rUG-ak-xSO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CdJ-hI-6xS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -118,6 +119,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hho-h8-x54" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1633" y="-807"/>
+        </scene>
+        <!--Detail Controller-->
+        <scene sceneID="Vd1-co-Vwq">
+            <objects>
+                <viewController id="sNr-KW-RXC" customClass="DetailController" customModule="Raccoon_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Tdp-lW-MH4"/>
+                        <viewControllerLayoutGuide type="bottom" id="OqV-XK-SCz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dKk-hb-Byu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Qwj-0n-mV8">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Qwj-0n-mV8" firstAttribute="top" secondItem="Tdp-lW-MH4" secondAttribute="bottom" id="8TI-V5-v1E"/>
+                            <constraint firstItem="Qwj-0n-mV8" firstAttribute="leading" secondItem="dKk-hb-Byu" secondAttribute="leading" id="fga-9D-wx1"/>
+                            <constraint firstItem="OqV-XK-SCz" firstAttribute="top" secondItem="Qwj-0n-mV8" secondAttribute="bottom" id="lnW-2u-hqV"/>
+                            <constraint firstAttribute="trailing" secondItem="Qwj-0n-mV8" secondAttribute="trailing" id="mCR-De-hXE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="Qwj-0n-mV8" id="aVW-vi-EBy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e0s-Xt-Osy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1633" y="-30"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cOA-gA-ldI">
