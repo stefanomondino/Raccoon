@@ -1,0 +1,32 @@
+{
+"name": "Raccoon",
+"version": "0.1.0",
+"summary": "A short description of Raccoon.",
+"description": "",
+"homepage": "https://github.com/stefanomondino/Raccoon",
+"license": "MIT",
+"authors": {
+"Stefano Mondino": "stefano.mondino.dev@gmail.com"
+},
+"source": {
+"git": "https://github.com/stefanomondino/Raccoon.git",
+"tag": "0.1.0"
+},
+"social_media_url": "https://twitter.com/puntoste",
+"platforms": {
+"ios": "8.0"
+},
+"requires_arc": true,
+"source_files": "Pod/Classes/**/*",
+"resource_bundles": {
+"Raccoon": [
+"Pod/Assets/*.png"
+]
+},
+"frameworks": "UIKit",
+"dependencies": {
+"ReactiveCocoa": [
+"~> 4.0"
+]
+}
+}

@@ -36,7 +36,7 @@ extension ViewModel: UICollectionViewDataSource {
         return self.numberOfSections()
     }
     @objc public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cellIdentifierAtIndexPath(indexPath), forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.listIdentifierAtIndexPath(indexPath), forIndexPath: indexPath)
         self.bindViewModelToCellAtIndexPath(cell, indexPath:indexPath)
         return cell
     }
@@ -44,13 +44,11 @@ extension ViewModel: UICollectionViewDataSource {
         cell.setViewModel(self.viewModelAtIndexPath(indexPath))
     }
     public func registerCellsForCollectionView(collectionView:UICollectionView) {
-        for id in self.cellIdentifiers() {
+        for id in self.listIdentifiers() {
             collectionView.registerNib(UINib.init(nibName: id, bundle: nil), forCellWithReuseIdentifier: id)
         }
     }
-    public func cellIdentifier() -> String! {
-        return ""
-    }
+    
 }
 
 

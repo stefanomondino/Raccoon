@@ -25,7 +25,7 @@ class ListCellViewModel: ViewModel {
         
         self.imageSignalProducer =  RESTManager.sharedInstance.getImageFromUrl(NSURL(string: self.artwork))
     }
-    override func cellIdentifier() -> String! {
+    override func listIdentifier() -> String! {
         return "ListCollectionViewCell"
     }
 }

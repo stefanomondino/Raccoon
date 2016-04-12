@@ -20,7 +20,7 @@ class PreviewCellViewModel: ViewModel {
     func buttonAction() {
         action.apply(url).start()
     }
-    override func cellIdentifier() -> String! {
+    override func listIdentifier() -> String! {
         return "PreviewCollectionViewCell"
     }
 }

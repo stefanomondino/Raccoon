@@ -48,13 +48,13 @@ class ListViewModel: ViewModel {
         })
         
     }
-    override func cellIdentifiers() -> [String]! {
+    override func listIdentifiers() -> [String]! {
         return ["ListCollectionViewCell"]
     }
-    override func cellIdentifierAtIndexPath(indexPath: NSIndexPath) -> String! {
-        return self.viewModelAtIndexPath(indexPath).cellIdentifier()
+    override func listIdentifierAtIndexPath(indexPath: NSIndexPath) -> String! {
+        return self.viewModelAtIndexPath(indexPath).listIdentifier()
     }
-    override func cellViewModelFromModel(model: AnyObject!) -> ViewModel! {
+    override func listViewModelFromModel(model: AnyObject!) -> ViewModel! {
         return ListCellViewModel(model: model as! Track)
     }
 }

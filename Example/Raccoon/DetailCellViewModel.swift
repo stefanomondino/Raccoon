@@ -23,7 +23,7 @@ class DetailCellViewModel: ViewModel {
         self.desc = value
     }
     
-    override func cellIdentifier() -> String! {
+    override func listIdentifier() -> String! {
         return "DetailCollectionViewCell"
     }
 }

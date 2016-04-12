@@ -2,9 +2,9 @@ import ReactiveCocoa
 import Result
 
 public protocol ViewModelType {
-    func cellIdentifiers() -> [String]!
-    func cellViewModelFromModel(model:AnyObject!) -> ViewModel!
-    func cellIdentifierAtIndexPath(indexPath:NSIndexPath) -> String!
+    func listIdentifiers() -> [String]!
+    func listViewModelFromModel(model:AnyObject!) -> ViewModel!
+    func listIdentifierAtIndexPath(indexPath:NSIndexPath) -> String!
 }
 
 
@@ -34,18 +34,21 @@ public class ViewModel:NSObject, ViewModelType {
         }
     }
     
-    public func cellIdentifiers() -> [String]! {
+    public func listIdentifiers() -> [String]! {
         return []
     }
-    public func cellViewModelFromModel(model: AnyObject!) -> ViewModel! {
+    public func listIdentifier() -> String! {
+        return String(self)
+    }
+    public func listViewModelFromModel(model: AnyObject!) -> ViewModel! {
         return nil
     }
-    public func cellIdentifierAtIndexPath(indexPath: NSIndexPath) -> String! {
+    public func listIdentifierAtIndexPath(indexPath: NSIndexPath) -> String! {
         return nil
     }
     
     public func viewModelAtIndexPath(indexPath:NSIndexPath) -> ViewModel! {
-        return self.cellViewModelFromModel(self.modelAtIndexPath(indexPath))
+        return self.listViewModelFromModel(self.modelAtIndexPath(indexPath))
     }
     
     public func modelAtIndexPath(indexPath:NSIndexPath) -> AnyObject! {
