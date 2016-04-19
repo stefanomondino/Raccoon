@@ -1,8 +1,8 @@
 {
 "name": "Raccoon",
-"version": "0.1.0",
-"summary": "A short description of Raccoon.",
-"description": "",
+"version": "0.1.1",
+"summary": "MVVM done right in Swift",
+"description": "Raccoon is a Swift microframework created to help development of Model-View-ViewModel (MVVM) iOS applications.",
 "homepage": "https://github.com/stefanomondino/Raccoon",
 "license": "MIT",
 "authors": {
