@@ -23,7 +23,7 @@ class PreviewCollectionViewCell: UICollectionViewCell {
     @IBAction func buttonPressed(sender: AnyObject) {
         self.vm.buttonAction()
     }
-    override func setViewModel(viewModel: ViewModel?) {
+    override func bindViewModel(viewModel: ViewModel?) {
         vm = viewModel as! PreviewCellViewModel
     }
 }

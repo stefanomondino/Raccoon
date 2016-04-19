@@ -26,7 +26,7 @@ class ListView: UIView {
         super.awakeFromNib()
     }
     
-    override func setViewModel(viewModel: ViewModel?) {
+    override func bindViewModel(viewModel: ViewModel?) {
         let vm = viewModel as! ListModel
         self.lbl_title.text = vm.title
         //self.lbl_description.text = vm.desc

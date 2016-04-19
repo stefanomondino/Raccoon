@@ -19,7 +19,7 @@ class DetailCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    override func setViewModel(viewModel: ViewModel?) {
+    override func bindViewModel(viewModel: ViewModel?) {
         let vm = viewModel as! DetailCellViewModel
         self.lbl_title.text = vm.title
         self.lbl_description.text = vm.desc

@@ -10,12 +10,18 @@ public protocol ViewModelType {
 
 public class ViewModel:NSObject, ViewModelType {
     
-    public let sectionedDataSource:MutableProperty<[[AnyObject]?]> = MutableProperty([])
-    
+    public lazy var sectionedDataSource:MutableProperty<[[AnyObject]?]> = MutableProperty([])
+    public lazy var hasResults:MutableProperty<Bool> = MutableProperty(false)
     public var reloadAction:ReactiveCocoa.Action<AnyObject?,[[AnyObject]?],NSError>? {
         didSet {
             if (reloadAction != nil ) {
                 sectionedDataSource <~ reloadAction!.values
+                hasResults <~ reloadAction!.values.map({ (sectionedDataSource) -> Bool in
+                    return sectionedDataSource.reduce(0, combine: { (count, array) -> Int in
+                        guard let sum:Int = array!.count else {return count}
+                        return count + sum
+                    }) > 0
+                })
             }
         }
     }

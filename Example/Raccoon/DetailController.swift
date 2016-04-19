@@ -22,12 +22,12 @@ class DetailController: UIViewController {
         self.title = myViewModel?.trackDetail.trackName
         //self.collectionView.delegate = self
         //self.bindViewModelToCollectionView(myViewModel, collectionView: self.collectionView)
-        self.bindViewModelToStackView(myViewModel, stackView: self.collectionView)
-        
+        //self.bindViewModelToStackView(myViewModel, stackView: self.collectionView)
+        self.collectionView.bindViewModel(self.myViewModel)
         print(self.myViewModel)
     }
 
-    override func setViewModel(viewModel: ViewModel?) {
+    override func bindViewModel(viewModel: ViewModel?) {
         self.myViewModel = viewModel as! DetailModel
     }
     

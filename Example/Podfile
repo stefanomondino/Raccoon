@@ -1,16 +1,17 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
-
+platform :ios, "8.0"
 target 'Raccoon_Example', :exclusive => true do
-  pod 'Raccoon', :path => '../'
+  pod 'Raccoon/UIKit', :path => '../'
   pod 'Alamofire'
   pod 'Mantle'
   pod 'MBProgressHUD'
   pod 'SDWebImage'
+
 end
 
 target 'Raccoon_Tests', :exclusive => true do
-  pod 'Raccoon', :path => '../'
+  pod 'Raccoon/UIKit', :path => '../'
 
   
 end

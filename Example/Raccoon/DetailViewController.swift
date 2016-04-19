@@ -20,7 +20,9 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         super.viewDidLoad()
         self.title = myViewModel?.trackDetail.trackName
         self.collectionView.delegate = self
-        self.bindViewModelToCollectionView(myViewModel, collectionView: self.collectionView)
+        //self.bindViewModelToCollectionView(myViewModel, collectionView: self.collectionView)
+        self.collectionView.bindViewModel(myViewModel)
+        
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -33,7 +35,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
             return CGSizeMake(collectionView.frame.size.width, 40)
         }
     }
-    override func setViewModel(viewModel: ViewModel?) {
+    override func bindViewModel(viewModel: ViewModel?) {
         self.myViewModel = viewModel as? DetailViewModel
     }
     

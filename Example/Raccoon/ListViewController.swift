@@ -12,15 +12,16 @@ import ReactiveCocoa
 import Result
 
 class ListViewController: UIViewController, UICollectionViewDelegateFlowLayout {
-    let viewModel = ListViewModel()
+    var viewModel:ListViewModel!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var lbl_loading: UILabel!
     @IBOutlet weak var searchBar: UITextField?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //self.navigationController?.navigationBarHidden = true
+        self.bindViewModel(ListViewModel())
         self.title = "Raccoon"
-        self.bindViewModelToCollectionView(viewModel, collectionView: collectionView)
+        //self.bindViewModelToCollectionView(viewModel, collectionView: collectionView)
+        
         self.collectionView.delegate = self
         self.collectionView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0)
         
@@ -34,11 +35,19 @@ class ListViewController: UIViewController, UICollectionViewDelegateFlowLayout {
             .flatMapError({ (error) -> SignalProducer<AnyObject?, NoError> in return .empty })
             .map{$0 as? String}
             .skipRepeats{$0 == $1}
-       
+        
+        viewModel?.hasResults.producer.skip(0).startWithNext({[unowned self] (visible) in
+            self.collectionView.backgroundColor = visible == false ? UIColor.redColor():UIColor.clearColor()
+            })
         
         self.viewModel.nextAction.values.observeNext{[unowned self] (segueParameters:SegueParameters!) in
             self.performSegueWithIdentifier(segueParameters.segueIdentifier, viewModel:segueParameters.viewModel )
         }
+    }
+    override func bindViewModel(viewModel: ViewModel?) {
+        super.bindViewModel(viewModel)
+        self.viewModel = viewModel as? ListViewModel
+        self.collectionView.bindViewModel(viewModel)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -49,6 +58,12 @@ class ListViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         //print("click")
         self.viewModel.nextAction.apply(indexPath).start()
         
+    }
+    override func showLoader() {
+        self.lbl_loading.hidden = false;
+    }
+    override func hideLoader() {
+        self.lbl_loading.hidden = true;
     }
 }
 

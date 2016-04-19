@@ -17,16 +17,34 @@
 "ios": "8.0"
 },
 "requires_arc": true,
-"source_files": "Pod/Classes/**/*",
 "resource_bundles": {
 "Raccoon": [
 "Pod/Assets/*.png"
 ]
 },
-"frameworks": "UIKit",
-"dependencies": {
-"ReactiveCocoa": [
-"~> 4.0"
-]
-}
+    "default_subspec" : "UIKit",
+"subspecs": [
+                 {
+                 "name": "Core",
+                 "header_dir": "Raccoon",
+             
+                    "source_files": "Pod/Classes/Core/*.{d,h,m,swift}",
+                 "dependencies": {
+                 "ReactiveCocoa": ["~> 4.0"]
+                 }
+                 
+             },
+        {
+            "name": "UIKit",
+            "frameworks": "UIKit",
+             "header_dir": "Raccoon",
+              "source_files": "Pod/Classes/UIKit/*.{d,h,m,swift}",
+                 "dependencies": {
+                 "Raccoon/Core": [
+                                   ]
+                 }
+            
+        }
+    ]
+    
 }

@@ -25,8 +25,11 @@ Basic structure of an iOS app never changes. You have some data to obtain, proce
 Usually you start from some kind of data that needs to be listed until you choose one of many items to display its content. It's quite easy to subdivide an app workflow in many sub-scenarios like this, maybe it's over-simplified but it's really effective.
 
 TODO
-- describe collectionview/tableview
-- listviewmodel/cellviewmodel 
+- finish collection view with section headers/footers
+- tableview
+- stackview
+- manage loading state
+- listviewmodel/cellviewmodel -> better undestanding 
 
  
 ## Usage

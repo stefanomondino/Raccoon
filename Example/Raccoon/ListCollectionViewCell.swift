@@ -23,7 +23,7 @@ class ListCollectionViewCell: UICollectionViewCell {
         
     }
     
-    override func setViewModel(viewModel: ViewModel?) {
+    override func bindViewModel(viewModel: ViewModel?) {
         let vm = viewModel as! ListCellViewModel
         self.lbl_title.text = vm.title
         self.lbl_collectionTitle.text = vm.collectionTitle
