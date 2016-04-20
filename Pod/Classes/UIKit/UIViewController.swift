@@ -21,6 +21,8 @@ import Result
 extension UIViewController {
 
     
+    
+    
     public func performSegueWithIdentifier(identifier:String!, viewModel:ViewModel?) {
         let signalProducer:SignalProducer<UIViewController,NSError>  = self.rac_signalForSelector(#selector(prepareForSegue))
             .toSignalProducer()
@@ -54,11 +56,6 @@ extension UIViewController {
                 self.hideLoader()
             }
             })
-        if (self.respondsToSelector(Selector("setViewModel:"))) {
-            self.setValue(viewModel, forKey: "viewModel")
-            
-            //self.performSelector(#selector(setViewModel(_:)), withObject: viewModel)
-        }
     }
     
    
