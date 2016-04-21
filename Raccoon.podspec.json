@@ -22,7 +22,6 @@
 "Pod/Assets/*.png"
 ]
 },
-    "default_subspec" : "UIKit",
 "subspecs": [
                  {
                  "name": "Core",
