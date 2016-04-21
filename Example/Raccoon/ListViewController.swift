@@ -43,6 +43,8 @@ class ListViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         self.viewModel.nextAction.values.observeNext{[unowned self] (segueParameters:SegueParameters!) in
             self.performSegueWithIdentifier(segueParameters.segueIdentifier, viewModel:segueParameters.viewModel )
         }
+        self.viewWillAppearSignalProducer().startWithNext{print($0)}
+        self.viewDidAppearSignalProducer().startWithNext{print($0)}
     }
     override func bindViewModel(viewModel: ViewModel?) {
         super.bindViewModel(viewModel)

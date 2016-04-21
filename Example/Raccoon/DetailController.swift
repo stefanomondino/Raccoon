@@ -25,6 +25,8 @@ class DetailController: UIViewController {
         //self.bindViewModelToStackView(myViewModel, stackView: self.collectionView)
         self.collectionView.bindViewModel(self.myViewModel)
         print(self.myViewModel)
+        self.viewWillAppearSignalProducer().startWithNext{print("viewWillAppearAnimated: "+String($0))}
+        self.viewDidAppearSignalProducer().startWithNext{print("viewDidAppearAnimated: "+String($0))}
     }
 
     override func bindViewModel(viewModel: ViewModel?) {

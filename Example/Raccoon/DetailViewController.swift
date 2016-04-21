@@ -22,7 +22,8 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         self.collectionView.delegate = self
         //self.bindViewModelToCollectionView(myViewModel, collectionView: self.collectionView)
         self.collectionView.bindViewModel(myViewModel)
-        
+        self.viewWillAppearSignalProducer().startWithNext{print($0)}
+        self.viewDidAppearSignalProducer().startWithNext{print($0)}
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
