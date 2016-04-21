@@ -22,21 +22,25 @@ class ListCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         
     }
-    
     override func bindViewModel(viewModel: ViewModel?) {
+        self.bindViewModelForResize(viewModel)
+        let vm = viewModel as! ListCellViewModel
+        self.imageDisposable?.dispose()
+        self.imageDisposable = ReactiveCocoa.CompositeDisposable.init()
+        
+        self.imageDisposable?.addDisposable(vm.imageSignalProducer
+            .map {$0 ?? UIImage.init(named: "img_pattern")?.resizableImageWithCapInsets(UIEdgeInsetsZero)}
+            .startWithNext { [unowned self ](image) -> () in
+                self.img_cover.image = image
+            })
+    }
+    
+    override func bindViewModelForResize(viewModel: ViewModel?) {
+    
+        
         let vm = viewModel as! ListCellViewModel
         self.lbl_title.text = vm.title
         self.lbl_collectionTitle.text = vm.collectionTitle
-        //if (self.superview != nil) {
-        
-//        self.imageDisposable?.dispose()
-//            self.imageDisposable = ReactiveCocoa.CompositeDisposable.init()
-//            
-//            self.imageDisposable?.addDisposable(vm.imageSignalProducer
-//                .map {$0 ?? UIImage.init(named: "img_pattern")?.resizableImageWithCapInsets(UIEdgeInsetsZero)}
-//                .startWithNext { [unowned self ](image) -> () in
-//                    self.img_cover.image = image
-//                })
-//        //}
+              
     }
 }

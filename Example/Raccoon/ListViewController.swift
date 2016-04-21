@@ -53,7 +53,7 @@ class ListViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return self.viewModel.autoSizeForItemAtIndexPath(indexPath, width: self.view.frame.size.width)
+        return self.viewModel.autoSizeForItemAtIndexPath(indexPath, width: self.view.frame.size.width-40)
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {

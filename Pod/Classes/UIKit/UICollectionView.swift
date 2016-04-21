@@ -34,6 +34,15 @@ extension UICollectionView {
     
 }
 
+extension UICollectionReusableView {
+    /** This should be override whenever collectionView autosizing is enabled to specify custom logic to resize a viewModel-driven cell
+     An example: a list item with multiline title and fixed-size image downloaded from the Internet. Title should be set inside bindViewModelForResize method, but the image should be downloaded only inside bindViewModel: method. TODO explain better
+    */
+ 
+    public func bindViewModelForResize(viewModel: ViewModel?) {
+            self.bindViewModel(viewModel)
+    }
+}
 
 extension ViewModel: UICollectionViewDataSource {
     @objc public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -44,11 +53,16 @@ extension ViewModel: UICollectionViewDataSource {
     }
     @objc public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.listIdentifierAtIndexPath(indexPath), forIndexPath: indexPath)
-        self.bindViewModelToCellAtIndexPath(cell, indexPath:indexPath)
+        self.bindViewModelToCellAtIndexPath(cell, indexPath:indexPath, forResize: false)
         return cell
     }
-    public func bindViewModelToCellAtIndexPath(cell:UICollectionReusableView, indexPath:NSIndexPath!) {
-        cell.bindViewModel(self.viewModelAtIndexPath(indexPath))
+    public func bindViewModelToCellAtIndexPath(cell:UICollectionReusableView, indexPath:NSIndexPath!, forResize:Bool!) {
+        if (forResize == true) {
+            cell.bindViewModelForResize(self.viewModelAtIndexPath(indexPath))
+        }
+        else {
+            cell.bindViewModel(self.viewModelAtIndexPath(indexPath))
+        }
     }
     
     public func registerNibsForCollectionView(collectionView:UICollectionView) {
@@ -88,8 +102,10 @@ extension ViewModel: UICollectionViewDataSource {
             self.staticCells = NSMutableDictionary()
         }
         var parameters = self.staticCells![nib] as? StaticCellParameters
+        
         if (parameters == nil) {
             let cell = NSBundle.mainBundle().loadNibNamed(nib, owner: self, options: [:]).first as! UICollectionViewCell
+            cell.contentView.translatesAutoresizingMaskIntoConstraints = false
             let constraint = NSLayoutConstraint(
                 item: cell.contentView,
                 attribute: .Width,
@@ -99,13 +115,12 @@ extension ViewModel: UICollectionViewDataSource {
                 multiplier: 1.0,
                 constant: width)
             cell.contentView.addConstraint(constraint)
-            
-            parameters = StaticCellParameters(constraint: constraint, cell:cell)
+            parameters = StaticCellParameters(constraint: nil, cell:cell)
             self.staticCells![nib] = parameters as? AnyObject
         }
-        
+
         parameters!.constraint?.constant = width
-        self.bindViewModelToCellAtIndexPath(parameters!.cell, indexPath: indexPath)
+        self.bindViewModelToCellAtIndexPath(parameters!.cell, indexPath: indexPath, forResize: true)
         return parameters?.cell
         
     }
