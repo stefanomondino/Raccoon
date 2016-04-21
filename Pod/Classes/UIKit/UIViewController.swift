@@ -45,6 +45,10 @@ extension UIViewController {
     }
     
     public func bindViewModel(viewModel:ViewModel?) {
+        if (self.respondsToSelector(Selector("setViewModel:"))) {
+            self.setValue(viewModel, forKey: "viewModel")
+            //self.performSelector(#selector(setViewModel(_:)), withObject: viewModel)
+        }
         viewModel!.reloadAction?.errors.observeNext({[unowned self] (error) in
             self.receivedError(error)
             })
