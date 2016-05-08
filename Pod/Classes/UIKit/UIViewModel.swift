@@ -11,11 +11,11 @@ import UIKit
 import ReactiveCocoa
 import Result
 
-public struct SegueParameters {
+public struct SegueParameters<T> {
     public var segueIdentifier:String!
-    public var viewModel:ViewModel?
+    public var viewModel:ViewModel<T>?
     
-    public init(segueIdentifier:String!, viewModel:ViewModel?) {
+    public init(segueIdentifier:String!, viewModel:ViewModel<T>?) {
         self.segueIdentifier = segueIdentifier
         self.viewModel = viewModel
     }
@@ -23,7 +23,7 @@ public struct SegueParameters {
 
 
 extension UIView {
-    public func bindViewModel(viewModel:ViewModel?) {
+    public func bindViewModel<T>(viewModel:ViewModel<T>?) {
         if (self.respondsToSelector(Selector("setViewModel:"))) {
             self.setValue(viewModel, forKey: "viewModel")
         //self.performSelector(#selector(setViewModel(_:)), withObject: viewModel)

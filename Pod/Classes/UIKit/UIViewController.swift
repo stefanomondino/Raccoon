@@ -16,13 +16,14 @@ import Result
 
 
 @objc protocol UIViewControllerRaccoon {
-    @objc func setViewModel(viewModel:ViewModel!)
+    //typealias T
+    @objc func setViewModel(viewModel:AnyObject)
 }
 
 
 extension UIViewController {
     
-    public func performSegueWithIdentifier(identifier:String!, viewModel:ViewModel?) {
+    public func performSegueWithIdentifier<T>(identifier:String!, viewModel:ViewModel<T>?) {
         let signalProducer:SignalProducer<UIViewController,NSError>  = self.rac_signalForSelector(#selector(prepareForSegue))
             .toSignalProducer()
             .take(1)
@@ -88,7 +89,7 @@ extension UIViewController {
         return signalProducer
     }
     
-    public func bindViewModel(viewModel:ViewModel?) {
+    public func bindViewModel<T>(viewModel:ViewModel<T>?) {
         if (self.respondsToSelector(#selector(UIViewControllerRaccoon.setViewModel(_:)))) {
             //self.setValue(viewModel, forKey: "viewModel")
             self.performSelector(#selector(UIViewControllerRaccoon.setViewModel(_:)), withObject: viewModel)

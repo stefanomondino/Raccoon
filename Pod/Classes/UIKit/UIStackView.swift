@@ -12,15 +12,15 @@ import UIKit
 @available(iOS 9.0, *)
 public extension UIStackView {
     
-     public func setViewModel(viewModel:ViewModel?) {
+     public func setViewModel(viewModel:ViewModel<AnyObject>?) {
         if (viewModel != nil) {
-            viewModel!.sectionedDataSource.producer.startWithNext {[unowned self] (model:[[AnyObject]?]) in
+            viewModel!.sectionedDataSource.producer.startWithNext {[unowned self] (model:[[AnyObject]]) in
                 let array = self.arrangedSubviews
                 for view in array {
                     self.removeArrangedSubview(view)
                 }
                 
-                model.first!?.forEach({[unowned self] (model) in
+                model.first!.forEach({[unowned self] (model) in
                     
                     let vm = viewModel!.listViewModelFromModel(model)!
                     let view:UIView = NSBundle.mainBundle().loadNibNamed(vm.listIdentifier(), owner: nil, options: nil).first as! UIView

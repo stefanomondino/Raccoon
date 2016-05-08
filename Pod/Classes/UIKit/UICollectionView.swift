@@ -17,7 +17,7 @@ extension UICollectionView {
     
     
     
-    override public func bindViewModel(viewModel:ViewModel?) {
+    override public func bindViewModel<T>(viewModel:ViewModel<T>?) {
         if (viewModel != nil) {
         self.dataSource = viewModel
         viewModel!.registerNibsForCollectionView(self)
@@ -39,7 +39,7 @@ extension UICollectionReusableView {
      An example: a list item with multiline title and fixed-size image downloaded from the Internet. Title should be set inside bindViewModelForResize method, but the image should be downloaded only inside bindViewModel: method. TODO explain better
     */
  
-    public func bindViewModelForResize(viewModel: ViewModel?) {
+    public func bindViewModelForResize<T>(viewModel: ViewModel<T>?) {
             self.bindViewModel(viewModel)
     }
 }
