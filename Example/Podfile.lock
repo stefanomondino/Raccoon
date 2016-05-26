@@ -4,9 +4,9 @@ PODS:
     - Mantle/extobjc (= 2.0.7)
   - Mantle/extobjc (2.0.7)
   - MBProgressHUD (0.9.2)
-  - Raccoon/Core (0.1.0):
+  - Raccoon/Core (0.1.1):
     - ReactiveCocoa (~> 4.0)
-  - Raccoon/UIKit (0.1.0):
+  - Raccoon/UIKit (0.1.1):
     - Raccoon/Core
   - ReactiveCocoa (4.1.0):
     - ReactiveCocoa/UI (= 4.1.0)
@@ -39,7 +39,7 @@ SPEC CHECKSUMS:
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   Mantle: bc40bb061d8c2c6fb48d5083e04d928c3b7f73d9
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
-  Raccoon: 9a55fd53b4e10185b1475f9c841fd5d2e0eb7673
+  Raccoon: 1a04694090422bfc62325bf2ac9ca7d43d8e98b9
   ReactiveCocoa: d70004d7a366a7b8e87e60ce2347182c77701949
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
