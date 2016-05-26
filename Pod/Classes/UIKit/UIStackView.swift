@@ -14,7 +14,7 @@ public extension UIStackView {
     
      public func setViewModel(viewModel:ViewModel?) {
         if (viewModel != nil) {
-            viewModel!.sectionedDataSource.producer.startWithNext {[unowned self] (model:[[AnyObject]?]) in
+            viewModel!.sectionedDataSource.producer.startWithNext {[unowned self] (model:[[Any]?]) in
                 let array = self.arrangedSubviews
                 for view in array {
                     self.removeArrangedSubview(view)

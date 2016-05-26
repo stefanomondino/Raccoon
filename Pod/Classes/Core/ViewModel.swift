@@ -3,16 +3,16 @@ import Result
 
 public protocol ViewModelType {
     func listIdentifiers() -> [String]!
-    func listViewModelFromModel(model:AnyObject!) -> ViewModel!
+    func listViewModelFromModel(model:Any!) -> ViewModel!
     func listIdentifierAtIndexPath(indexPath:NSIndexPath) -> String!
 }
 
 
 public class ViewModel:NSObject, ViewModelType {
     
-    public lazy var sectionedDataSource:MutableProperty<[[AnyObject]?]> = MutableProperty([])
+    public lazy var sectionedDataSource:MutableProperty<[[Any]?]> = MutableProperty([])
     public lazy var hasResults:MutableProperty<Bool> = MutableProperty(false)
-    public var reloadAction:ReactiveCocoa.Action<AnyObject?,[[AnyObject]?],NSError>? {
+    public var reloadAction:ReactiveCocoa.Action<Any?,[[Any]?],NSError>? {
         didSet {
             if (reloadAction != nil ) {
                 sectionedDataSource <~ reloadAction!.values
@@ -26,7 +26,7 @@ public class ViewModel:NSObject, ViewModelType {
         }
     }
     
-    public var dataSource:[AnyObject]?{
+    public var dataSource:[Any]?{
         get {
             if (sectionedDataSource.value.first == nil) {
                 sectionedDataSource.value = [[]]
@@ -46,7 +46,7 @@ public class ViewModel:NSObject, ViewModelType {
     public func listIdentifier() -> String! {
         return String(self)
     }
-    public func listViewModelFromModel(model: AnyObject!) -> ViewModel! {
+    public func listViewModelFromModel(model: Any!) -> ViewModel! {
         return nil
     }
     public func listIdentifierAtIndexPath(indexPath: NSIndexPath) -> String! {
@@ -57,7 +57,7 @@ public class ViewModel:NSObject, ViewModelType {
         return self.listViewModelFromModel(self.modelAtIndexPath(indexPath))
     }
     
-    public func modelAtIndexPath(indexPath:NSIndexPath) -> AnyObject! {
+    public func modelAtIndexPath(indexPath:NSIndexPath) -> Any! {
         return sectionedDataSource.value[indexPath.section]![indexPath.row]
     }
     public func numberOfSections() -> Int {
