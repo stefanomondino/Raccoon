@@ -3,16 +3,16 @@ import Result
 
 public protocol ViewModelType {
     func listIdentifiers() -> [String]!
-    func listViewModelFromModel(model:Any!) -> ViewModel!
+    func listViewModelFromModel(model:AnyObject!) -> ViewModel!
     func listIdentifierAtIndexPath(indexPath:NSIndexPath) -> String!
 }
 
 
 public class ViewModel:NSObject, ViewModelType {
     
-    public lazy var sectionedDataSource:MutableProperty<[[Any]?]> = MutableProperty([])
+    public lazy var sectionedDataSource:MutableProperty<[[AnyObject]?]> = MutableProperty([])
     public lazy var hasResults:MutableProperty<Bool> = MutableProperty(false)
-    public var reloadAction:ReactiveCocoa.Action<Any?,[[Any]?],NSError>? {
+    public var reloadAction:ReactiveCocoa.Action<AnyObject?,[[AnyObject]?],NSError>? {
         didSet {
             if (reloadAction != nil ) {
                 sectionedDataSource <~ reloadAction!.values
@@ -26,7 +26,7 @@ public class ViewModel:NSObject, ViewModelType {
         }
     }
     
-    public var dataSource:[Any]?{
+    public var dataSource:[AnyObject]?{
         get {
             if (sectionedDataSource.value.first == nil) {
                 sectionedDataSource.value = [[]]
@@ -34,7 +34,7 @@ public class ViewModel:NSObject, ViewModelType {
             return sectionedDataSource.value.first!
         }
         set {
-           
+            
             sectionedDataSource.value =  [newValue ?? []]
             
         }
@@ -46,7 +46,7 @@ public class ViewModel:NSObject, ViewModelType {
     public func listIdentifier() -> String! {
         return String(self)
     }
-    public func listViewModelFromModel(model: Any!) -> ViewModel! {
+    public func listViewModelFromModel(model: AnyObject!) -> ViewModel! {
         return nil
     }
     public func listIdentifierAtIndexPath(indexPath: NSIndexPath) -> String! {
@@ -57,7 +57,7 @@ public class ViewModel:NSObject, ViewModelType {
         return self.listViewModelFromModel(self.modelAtIndexPath(indexPath))
     }
     
-    public func modelAtIndexPath(indexPath:NSIndexPath) -> Any! {
+    public func modelAtIndexPath(indexPath:NSIndexPath) -> AnyObject! {
         return sectionedDataSource.value[indexPath.section]![indexPath.row]
     }
     public func numberOfSections() -> Int {
