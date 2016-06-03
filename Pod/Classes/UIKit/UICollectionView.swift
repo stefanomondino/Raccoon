@@ -22,8 +22,8 @@ extension UICollectionView {
         self.dataSource = viewModel
         viewModel!.registerNibsForCollectionView(self)
         
-        viewModel!.sectionedDataSource.producer.startWithNext {[unowned self] (_) in
-            self.reloadData()
+        viewModel!.sectionedDataSource.producer.startWithNext {[weak self] (_) in
+            self?.reloadData()
         }
     }
     }

@@ -14,18 +14,18 @@ public extension UIStackView {
     
      public func setViewModel(viewModel:ViewModel?) {
         if (viewModel != nil) {
-            viewModel!.sectionedDataSource.producer.startWithNext {[unowned self] (model:[[AnyObject]?]) in
-                let array = self.arrangedSubviews
+            viewModel!.sectionedDataSource.producer.startWithNext {[weak self] (model:[[AnyObject]?]) in
+                let array = self?.arrangedSubviews ?? []
                 for view in array {
-                    self.removeArrangedSubview(view)
+                    self?.removeArrangedSubview(view)
                 }
                 
-                model.first!?.forEach({[unowned self] (model) in
+                model.first!?.forEach({[weak self] (model) in
                     
                     let vm = viewModel!.listViewModelFromModel(model)!
                     let view:UIView = NSBundle.mainBundle().loadNibNamed(vm.listIdentifier(), owner: nil, options: nil).first as! UIView
                     view.bindViewModel(vm)
-                    self.addArrangedSubview(view)
+                    self?.addArrangedSubview(view)
                     
                     
                     })
