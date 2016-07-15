@@ -93,10 +93,10 @@ extension UIViewController {
             //self.setValue(viewModel, forKey: "viewModel")
             self.performSelector(#selector(UIViewControllerRaccoon.setViewModel(_:)), withObject: viewModel)
         }
-        viewModel!.reloadAction?.errors.observeNext({[weak self] (error) in
+        viewModel?.reloadAction?.errors.observeNext({[weak self] (error) in
             self?.receivedError(error)
             })
-        viewModel!.reloadAction?.executing.producer.startWithNext({[weak self] (show) in
+        viewModel?.reloadAction?.executing.producer.startWithNext({[weak self] (show) in
             if (show) {
                 self?.showLoader()
             }
