@@ -143,6 +143,7 @@
 				TargetAttributes = {
 					7BE33FA11CF74F8900846156 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -297,6 +298,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = it.synesthesia.Raccoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -317,6 +319,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = it.synesthesia.Raccoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

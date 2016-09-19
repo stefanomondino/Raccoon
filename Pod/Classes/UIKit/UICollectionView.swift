@@ -104,7 +104,7 @@ extension ViewModel: UICollectionViewDataSource {
         var parameters = self.staticCells![nib] as? StaticCellParameters
         
         if (parameters == nil) {
-            let cell = NSBundle.mainBundle().loadNibNamed(nib, owner: self, options: [:]).first as! UICollectionViewCell
+            let cell = NSBundle.mainBundle().loadNibNamed(nib, owner: self, options: [:])!.first as! UICollectionViewCell
             cell.contentView.translatesAutoresizingMaskIntoConstraints = false
             let constraint = NSLayoutConstraint(
                 item: cell.contentView,
