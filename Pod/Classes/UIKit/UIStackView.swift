@@ -23,7 +23,7 @@ public extension UIStackView {
                 model.first!?.forEach({[weak self] (model) in
                     
                     let vm = viewModel!.listViewModelFromModel(model)!
-                    let view:UIView = NSBundle.mainBundle().loadNibNamed(vm.listIdentifier(), owner: nil, options: nil).first as! UIView
+                    let view:UIView = NSBundle.mainBundle().loadNibNamed(vm.listIdentifier(), owner: nil, options: nil)!.first as! UIView
                     view.bindViewModel(vm)
                     self?.addArrangedSubview(view)
                     
