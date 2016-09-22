@@ -8,7 +8,9 @@
 
 import Foundation
 import UIKit
-import ReactiveCocoa
+import ReactiveObjCBridge
+import ReactiveSwift
+import ReactiveObjC
 import Result
 
 
@@ -16,36 +18,36 @@ import Result
 
 
 @objc protocol UIViewControllerRaccoon {
-    @objc func setViewModel(viewModel:ViewModel!)
+    @objc func setViewModel(_ viewModel:ViewModel!)
 }
 
 
 extension UIViewController {
     
-    public func performSegueWithIdentifier(identifier:String!, viewModel:ViewModel?) {
-        let signalProducer:SignalProducer<UIViewController,NSError>  = self.rac_signalForSelector(#selector(prepareForSegue))
+    public func performSegueWithIdentifier(_ identifier:String!, viewModel:ViewModel?) {
+        let signalProducer:SignalProducer<UIViewController,NSError>  = self.rac_signal(for: #selector(prepare(`for`:sender:)))
             .toSignalProducer()
-            .take(1)
+            .take(first:1)
             .map({
                 let segue:UIStoryboardSegue = ($0! as! RACTuple).first as! UIStoryboardSegue
-                return segue.destinationViewController 
-            }).flatMap(FlattenStrategy.Latest) { (viewController:UIViewController) -> SignalProducer<UIViewController, NSError> in
+                return segue.destination 
+            }).flatMap(FlattenStrategy.latest) { (viewController:UIViewController) -> SignalProducer<UIViewController, NSError> in
             if (viewController is UINavigationController) {
                 let vc = (viewController as! UINavigationController).topViewController
                 return SignalProducer<UIViewController, NSError>(value:vc!)
             }
             return SignalProducer<UIViewController, NSError>(value:viewController)
         }
-        
-        signalProducer.startWithNext { (viewController) in
-            viewController.bindViewModel(viewModel)
+        signalProducer.startWithResult { (result) in
+            result.value?.bindViewModel(viewModel)
         }
-        self .performSegueWithIdentifier(identifier, sender: self)
+        
+        self.performSegue(withIdentifier: identifier, sender: self)
     }
     
     public func viewWillAppearSignalProducer() -> SignalProducer<Bool,NoError> {
         let signalProducer:SignalProducer<Bool,NoError> = self
-            .rac_signalForSelector(#selector(UIViewController.viewWillAppear(_:))).toSignalProducer()
+            .rac_signal(for: #selector(UIViewController.viewWillAppear(_:))).toSignalProducer()
             .flatMapError({_ in return .empty})
             .map({
                 let animated:Bool = ($0! as! RACTuple).first as! Bool
@@ -56,7 +58,7 @@ extension UIViewController {
     }
     public func viewDidAppearSignalProducer() -> SignalProducer<Bool,NoError> {
         let signalProducer:SignalProducer<Bool,NoError> = self
-            .rac_signalForSelector(#selector(UIViewController.viewDidAppear(_:))).toSignalProducer()
+            .rac_signal(for: #selector(UIViewController.viewDidAppear(_:))).toSignalProducer()
             .flatMapError({_ in return .empty})
             .map({
                 let animated:Bool = ($0! as! RACTuple).first as! Bool
@@ -67,7 +69,7 @@ extension UIViewController {
     }
     public func viewWillDisappearSignalProducer() -> SignalProducer<Bool,NoError> {
         let signalProducer:SignalProducer<Bool,NoError> = self
-            .rac_signalForSelector(#selector(UIViewController.viewWillDisappear(_:))).toSignalProducer()
+            .rac_signal(for: #selector(UIViewController.viewWillDisappear(_:))).toSignalProducer()
             .flatMapError({_ in return .empty})
             .map({
                 let animated:Bool = ($0! as! RACTuple).first as! Bool
@@ -78,7 +80,7 @@ extension UIViewController {
     }
     public func viewDidDisappearSignalProducer() -> SignalProducer<Bool,NoError> {
         let signalProducer:SignalProducer<Bool,NoError> = self
-            .rac_signalForSelector(#selector(UIViewController.viewDidDisappear(_:))).toSignalProducer()
+            .rac_signal(for: #selector(UIViewController.viewDidDisappear(_:))).toSignalProducer()
             .flatMapError({_ in return .empty})
             .map({
                 let animated:Bool = ($0! as! RACTuple).first as! Bool
@@ -88,29 +90,28 @@ extension UIViewController {
         return signalProducer
     }
     
-    public func bindViewModel(viewModel:ViewModel?) {
-        if (self.respondsToSelector(#selector(UIViewControllerRaccoon.setViewModel(_:)))) {
+    public func bindViewModel(_ viewModel:ViewModel?) {
+        if (self.responds(to: #selector(UIViewControllerRaccoon.setViewModel(_:)))) {
             //self.setValue(viewModel, forKey: "viewModel")
-            self.performSelector(#selector(UIViewControllerRaccoon.setViewModel(_:)), withObject: viewModel)
+            self.perform(#selector(UIViewControllerRaccoon.setViewModel(_:)), with: viewModel)
         }
-        viewModel?.reloadAction?.errors.observeNext({[weak self] (error) in
-            self?.receivedError(error)
-            })
-        viewModel?.reloadAction?.executing.producer.startWithNext({[weak self] (show) in
-            if (show) {
+       _ = viewModel?.reloadAction?.errors.observeResult({[weak self] (result) in
+          self?.receivedError(result.value!)
+        })
+        viewModel?.reloadAction?.isExecuting.producer.startWithResult({[weak self] (result) in
+            if (result.value == true)  {
                 self?.showLoader()
             }
             else {
                 self?.hideLoader()
-            }
-            })
+            }        })
     }
     
    
     
     
 //    public func setViewModel(viewModel:ViewModel?){}
-    public func receivedError(error:NSError) {}
+    public func receivedError(_ error:NSError) {}
     public func showLoader() {}
     public func hideLoader() {}
 }

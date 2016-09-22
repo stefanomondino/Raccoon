@@ -7,23 +7,23 @@
 //
 import Foundation
 import UIKit
-
+import Result
 
 @available(iOS 9.0, *)
 public extension UIStackView {
     
-     public func setViewModel(viewModel:ViewModel?) {
+     public func setViewModel(_ viewModel:ViewModel?) {
         if (viewModel != nil) {
-            viewModel!.sectionedDataSource.producer.startWithNext {[weak self] (model:[[AnyObject]?]) in
+            viewModel!.sectionedDataSource.producer.startWithResult {[weak self] (result) in
                 let array = self?.arrangedSubviews ?? []
                 for view in array {
                     self?.removeArrangedSubview(view)
                 }
-                
-                model.first!?.forEach({[weak self] (model) in
+                let model = result.value
+                model?.first!?.forEach({[weak self] (model) in
                     
                     let vm = viewModel!.listViewModelFromModel(model)!
-                    let view:UIView = NSBundle.mainBundle().loadNibNamed(vm.listIdentifier(), owner: nil, options: nil)!.first as! UIView
+                    let view:UIView = Bundle.main.loadNibNamed(vm.listIdentifier(), owner: nil, options: nil)!.first as! UIView
                     view.bindViewModel(vm)
                     self?.addArrangedSubview(view)
                     

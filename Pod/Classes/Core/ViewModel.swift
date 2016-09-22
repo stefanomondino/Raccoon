@@ -1,23 +1,24 @@
-import ReactiveCocoa
+import ReactiveObjC
+import ReactiveSwift
 import Result
 
 public protocol ViewModelType {
     func listIdentifiers() -> [String]!
-    func listViewModelFromModel(model:AnyObject!) -> ViewModel!
-    func listIdentifierAtIndexPath(indexPath:NSIndexPath) -> String!
+    func listViewModelFromModel(_ model:AnyObject!) -> ViewModel!
+    func listIdentifierAtIndexPath(_ indexPath:IndexPath) -> String!
 }
 
 
-public class ViewModel:NSObject, ViewModelType {
+open class ViewModel:NSObject, ViewModelType {
     
-    public lazy var sectionedDataSource:MutableProperty<[[AnyObject]?]> = MutableProperty([])
-    public lazy var hasResults:MutableProperty<Bool> = MutableProperty(false)
-    public var reloadAction:ReactiveCocoa.Action<AnyObject?,[[AnyObject]?],NSError>? {
+    open lazy var sectionedDataSource:MutableProperty<[[AnyObject]?]> = MutableProperty([])
+    open lazy var hasResults:MutableProperty<Bool> = MutableProperty(false)
+    open var reloadAction:ReactiveSwift.Action<AnyObject?,[[AnyObject]?],NSError>? {
         didSet {
             if (reloadAction != nil ) {
                 sectionedDataSource <~ reloadAction!.values
                 hasResults <~ reloadAction!.values.map({ (sectionedDataSource) -> Bool in
-                    return sectionedDataSource.reduce(0, combine: { (count, array) -> Int in
+                    return sectionedDataSource.reduce(0, { (count, array) -> Int in
                         guard let sum:Int = array!.count else {return count}
                         return count + sum
                     }) > 0
@@ -26,7 +27,7 @@ public class ViewModel:NSObject, ViewModelType {
         }
     }
     
-    public var dataSource:[AnyObject]?{
+    open var dataSource:[AnyObject]?{
         get {
             if (sectionedDataSource.value.first == nil) {
                 sectionedDataSource.value = [[]]
@@ -40,30 +41,30 @@ public class ViewModel:NSObject, ViewModelType {
         }
     }
     
-    public func listIdentifiers() -> [String]! {
+    open func listIdentifiers() -> [String]! {
         return []
     }
-    public func listIdentifier() -> String! {
-        return String(self)
+    open func listIdentifier() -> String! {
+        return String(describing: self)
     }
-    public func listViewModelFromModel(model: AnyObject!) -> ViewModel! {
+    open func listViewModelFromModel(_ model: AnyObject!) -> ViewModel! {
         return nil
     }
-    public func listIdentifierAtIndexPath(indexPath: NSIndexPath) -> String! {
+    open func listIdentifierAtIndexPath(_ indexPath: IndexPath) -> String! {
         return nil
     }
     
-    public func viewModelAtIndexPath(indexPath:NSIndexPath) -> ViewModel! {
+    open func viewModelAtIndexPath(_ indexPath:IndexPath) -> ViewModel! {
         return self.listViewModelFromModel(self.modelAtIndexPath(indexPath))
     }
     
-    public func modelAtIndexPath(indexPath:NSIndexPath) -> AnyObject! {
-        return sectionedDataSource.value[indexPath.section]![indexPath.row]
+    open func modelAtIndexPath(_ indexPath:IndexPath) -> AnyObject! {
+        return sectionedDataSource.value[(indexPath as NSIndexPath).section]![(indexPath as NSIndexPath).row]
     }
-    public func numberOfSections() -> Int {
+    open func numberOfSections() -> Int {
         return sectionedDataSource.value.count
     }
-    public func numberOfItemsInSection(section:Int!) -> Int {
+    open func numberOfItemsInSection(_ section:Int!) -> Int {
         return sectionedDataSource.value[section]!.count
     }
     

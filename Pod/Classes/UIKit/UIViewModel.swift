@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import ReactiveCocoa
+import ReactiveObjCBridge
 import Result
 
 public struct SegueParameters {
@@ -23,8 +23,8 @@ public struct SegueParameters {
 
 
 extension UIView {
-    public func bindViewModel(viewModel:ViewModel?) {
-        if (self.respondsToSelector(Selector("setViewModel:"))) {
+    public func bindViewModel(_ viewModel:ViewModel?) {
+        if (self.responds(to: Selector("setViewModel:"))) {
             self.setValue(viewModel, forKey: "viewModel")
         //self.performSelector(#selector(setViewModel(_:)), withObject: viewModel)
         }

@@ -7,17 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B6029BE1D93D42400DA6307 /* ReactiveObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6029BB1D93D42400DA6307 /* ReactiveObjC.framework */; };
+		7B6029BF1D93D42400DA6307 /* ReactiveObjCBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6029BC1D93D42400DA6307 /* ReactiveObjCBridge.framework */; };
+		7B6029C01D93D42400DA6307 /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6029BD1D93D42400DA6307 /* ReactiveSwift.framework */; };
 		7BE33FA61CF74F8900846156 /* Raccoon.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BE33FA51CF74F8900846156 /* Raccoon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BE33FB71CF74FD700846156 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE33FB01CF74FD700846156 /* ViewModel.swift */; };
 		7BE33FB81CF74FD700846156 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE33FB21CF74FD700846156 /* UICollectionView.swift */; };
 		7BE33FB91CF74FD700846156 /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE33FB31CF74FD700846156 /* UIStackView.swift */; };
 		7BE33FBA1CF74FD700846156 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE33FB41CF74FD700846156 /* UIViewController.swift */; };
 		7BE33FBB1CF74FD700846156 /* UIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE33FB51CF74FD700846156 /* UIViewModel.swift */; };
-		7BE33FBE1CF7501A00846156 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE33FBC1CF7501A00846156 /* ReactiveCocoa.framework */; };
 		7BE33FBF1CF7501A00846156 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE33FBD1CF7501A00846156 /* Result.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B6029BB1D93D42400DA6307 /* ReactiveObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveObjC.framework; path = Carthage/Build/iOS/ReactiveObjC.framework; sourceTree = "<group>"; };
+		7B6029BC1D93D42400DA6307 /* ReactiveObjCBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveObjCBridge.framework; path = Carthage/Build/iOS/ReactiveObjCBridge.framework; sourceTree = "<group>"; };
+		7B6029BD1D93D42400DA6307 /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
 		7BE33FA21CF74F8900846156 /* Raccoon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Raccoon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE33FA51CF74F8900846156 /* Raccoon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Raccoon.h; sourceTree = "<group>"; };
 		7BE33FA71CF74F8900846156 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -26,7 +31,6 @@
 		7BE33FB31CF74FD700846156 /* UIStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
 		7BE33FB41CF74FD700846156 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		7BE33FB51CF74FD700846156 /* UIViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewModel.swift; sourceTree = "<group>"; };
-		7BE33FBC1CF7501A00846156 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		7BE33FBD1CF7501A00846156 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -35,8 +39,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BE33FBE1CF7501A00846156 /* ReactiveCocoa.framework in Frameworks */,
 				7BE33FBF1CF7501A00846156 /* Result.framework in Frameworks */,
+				7B6029BF1D93D42400DA6307 /* ReactiveObjCBridge.framework in Frameworks */,
+				7B6029BE1D93D42400DA6307 /* ReactiveObjC.framework in Frameworks */,
+				7B6029C01D93D42400DA6307 /* ReactiveSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,7 +52,9 @@
 		7BE33F981CF74F8900846156 = {
 			isa = PBXGroup;
 			children = (
-				7BE33FBC1CF7501A00846156 /* ReactiveCocoa.framework */,
+				7B6029BB1D93D42400DA6307 /* ReactiveObjC.framework */,
+				7B6029BC1D93D42400DA6307 /* ReactiveObjCBridge.framework */,
+				7B6029BD1D93D42400DA6307 /* ReactiveSwift.framework */,
 				7BE33FBD1CF7501A00846156 /* Result.framework */,
 				7BE33FA41CF74F8900846156 /* Raccoon */,
 				7BE33FA31CF74F8900846156 /* Products */,
@@ -298,7 +306,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = it.synesthesia.Raccoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -319,7 +327,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = it.synesthesia.Raccoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
