@@ -23,7 +23,7 @@ public struct SegueParameters {
 
 
 extension UIView {
-    public func bindViewModel(_ viewModel:ViewModel?) {
+    open func bindViewModel(_ viewModel:ViewModel?) {
         if (self.responds(to: Selector("setViewModel:"))) {
             self.setValue(viewModel, forKey: "viewModel")
         //self.performSelector(#selector(setViewModel(_:)), withObject: viewModel)

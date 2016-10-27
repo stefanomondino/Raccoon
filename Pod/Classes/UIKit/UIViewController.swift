@@ -24,7 +24,7 @@ import Result
 
 extension UIViewController {
     
-    public func performSegueWithIdentifier(_ identifier:String!, viewModel:ViewModel?) {
+    open func performSegueWithIdentifier(_ identifier:String!, viewModel:ViewModel?) {
         let signalProducer:SignalProducer<UIViewController,NSError>  = self.rac_signal(for: #selector(prepare(`for`:sender:)))
             .toSignalProducer()
             .take(first:1)
@@ -90,7 +90,7 @@ extension UIViewController {
         return signalProducer
     }
     
-    public func bindViewModel(_ viewModel:ViewModel?) {
+    open func bindViewModel(_ viewModel:ViewModel?) {
         if (self.responds(to: #selector(UIViewControllerRaccoon.setViewModel(_:)))) {
             //self.setValue(viewModel, forKey: "viewModel")
             self.perform(#selector(UIViewControllerRaccoon.setViewModel(_:)), with: viewModel)
@@ -111,7 +111,7 @@ extension UIViewController {
     
     
 //    public func setViewModel(viewModel:ViewModel?){}
-    public func receivedError(_ error:NSError) {}
-    public func showLoader() {}
-    public func hideLoader() {}
+    open func receivedError(_ error:NSError) {}
+    open func showLoader() {}
+    open func hideLoader() {}
 }

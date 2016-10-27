@@ -17,7 +17,7 @@ extension UICollectionView {
     
     
     
-    override public func bindViewModel(_ viewModel:ViewModel?) {
+    override open func bindViewModel(_ viewModel:ViewModel?) {
         if (viewModel != nil) {
         self.dataSource = viewModel
         viewModel!.registerNibsForCollectionView(self)
@@ -27,9 +27,9 @@ extension UICollectionView {
         }
     }
     }
-    public func receivedError(_ error:NSError) {}
-    public func showLoader() {}
-    public func hideLoader() {}
+    open func receivedError(_ error:NSError) {}
+    open func showLoader() {}
+    open func hideLoader() {}
     
     
 }
@@ -39,7 +39,7 @@ extension UICollectionReusableView {
      An example: a list item with multiline title and fixed-size image downloaded from the Internet. Title should be set inside bindViewModelForResize method, but the image should be downloaded only inside bindViewModel: method. TODO explain better
     */
  
-    public func bindViewModelForResize(_ viewModel: ViewModel?) {
+    open func bindViewModelForResize(_ viewModel: ViewModel?) {
             self.bindViewModel(viewModel)
     }
 }
@@ -56,7 +56,7 @@ extension ViewModel: UICollectionViewDataSource {
         self.bindViewModelToCellAtIndexPath(cell, indexPath:indexPath, forResize: false)
         return cell
     }
-    public func bindViewModelToCellAtIndexPath(_ cell:UICollectionReusableView, indexPath:IndexPath!, forResize:Bool!) {
+    open func bindViewModelToCellAtIndexPath(_ cell:UICollectionReusableView, indexPath:IndexPath!, forResize:Bool!) {
         if (forResize == true) {
             cell.bindViewModelForResize(self.viewModelAtIndexPath(indexPath))
         }
@@ -65,7 +65,7 @@ extension ViewModel: UICollectionViewDataSource {
         }
     }
     
-    public func registerNibsForCollectionView(_ collectionView:UICollectionView) {
+    open func registerNibsForCollectionView(_ collectionView:UICollectionView) {
         for id in self.listIdentifiers() {
             collectionView.register(UINib.init(nibName: id, bundle: nil), forCellWithReuseIdentifier: id)
         }
@@ -94,7 +94,7 @@ extension ViewModel: UICollectionViewDataSource {
     }
    
     
-    public func staticCellForSizeAtIndexPath (_ indexPath:IndexPath! ,width:CGFloat!) -> UICollectionViewCell?{
+    open func staticCellForSizeAtIndexPath (_ indexPath:IndexPath! ,width:CGFloat!) -> UICollectionViewCell?{
         guard let nib = self.listIdentifierAtIndexPath(indexPath) else {
             return nil
         }
@@ -124,7 +124,7 @@ extension ViewModel: UICollectionViewDataSource {
         return parameters?.cell
         
     }
-    public func autoSizeForItemAtIndexPath(_ indexPath:IndexPath, width:CGFloat) -> CGSize {
+    open func autoSizeForItemAtIndexPath(_ indexPath:IndexPath, width:CGFloat) -> CGSize {
         let cell = self.staticCellForSizeAtIndexPath(indexPath, width: width)
         cell?.contentView.setNeedsLayout()
         cell?.contentView.layoutIfNeeded()

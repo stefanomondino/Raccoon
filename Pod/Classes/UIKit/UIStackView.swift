@@ -10,9 +10,9 @@ import UIKit
 import Result
 
 @available(iOS 9.0, *)
-public extension UIStackView {
+extension UIStackView {
     
-     public func setViewModel(_ viewModel:ViewModel?) {
+     open func setViewModel(_ viewModel:ViewModel?) {
         if (viewModel != nil) {
             viewModel!.sectionedDataSource.producer.startWithResult {[weak self] (result) in
                 let array = self?.arrangedSubviews ?? []
