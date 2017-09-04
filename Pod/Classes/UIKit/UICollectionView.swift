@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import ReactiveObjCBridge
+import ReactiveCocoa
 import Result
 import ObjectiveC
 

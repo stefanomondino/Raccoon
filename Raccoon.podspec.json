@@ -29,7 +29,7 @@
              
                     "source_files": "Pod/Classes/Core/*.{d,h,m,swift}",
                  "dependencies": {
-                 "ReactiveCocoa": ["~> 4.0"]
+                 "ReactiveCocoa": ["~> 6.0"]
                  }
                  
              },
