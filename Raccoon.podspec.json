@@ -1,49 +1,49 @@
 {
-"name": "Raccoon",
-"version": "0.1.1",
-"summary": "MVVM done right in Swift",
-"description": "Raccoon is a Swift microframework created to help development of Model-View-ViewModel (MVVM) iOS applications.",
-"homepage": "https://github.com/stefanomondino/Raccoon",
-"license": "MIT",
-"authors": {
-"Stefano Mondino": "stefano.mondino.dev@gmail.com"
-},
-"source": {
-"git": "https://github.com/stefanomondino/Raccoon.git",
-"tag": "0.1.1"
-},
-"social_media_url": "https://twitter.com/puntoste",
-"platforms": {
-"ios": "8.0"
-},
-"requires_arc": true,
-"resource_bundles": {
-"Raccoon": [
-"Pod/Assets/*.png"
-]
-},
-"subspecs": [
+    "name": "Raccoon",
+    "version": "0.2.0",
+    "summary": "MVVM done right in Swift",
+    "description": "Raccoon is a Swift microframework created to help development of Model-View-ViewModel (MVVM) iOS applications.",
+    "homepage": "https://github.com/stefanomondino/Raccoon",
+    "license": "MIT",
+    "authors": {
+        "Stefano Mondino": "stefano.mondino.dev@gmail.com"
+    },
+    "source": {
+        "git": "https://github.com/stefanomondino/Raccoon.git",
+        "tag": "0.2.0"
+    },
+    "social_media_url": "https://twitter.com/puntoste",
+    "platforms": {
+        "ios": "8.0"
+    },
+    "requires_arc": true,
+    "resource_bundles": {
+        "Raccoon": [
+                    "Pod/Assets/*.png"
+                    ]
+    },
+    "subspecs": [
                  {
                  "name": "Core",
                  "header_dir": "Raccoon",
-             
-                    "source_files": "Pod/Classes/Core/*.{d,h,m,swift}",
+                 
+                 "source_files": "Pod/Classes/Core/*.{d,h,m,swift}",
                  "dependencies": {
                  "ReactiveCocoa": ["~> 6.0"]
                  }
                  
-             },
-        {
-            "name": "UIKit",
-            "frameworks": "UIKit",
-             "header_dir": "Raccoon",
-              "source_files": "Pod/Classes/UIKit/*.{d,h,m,swift}",
+                 },
+                 {
+                 "name": "UIKit",
+                 "frameworks": "UIKit",
+                 "header_dir": "Raccoon",
+                 "source_files": "Pod/Classes/UIKit/*.{d,h,m,swift}",
                  "dependencies": {
                  "Raccoon/Core": [
-                                   ]
+                 ]
                  }
-            
-        }
-    ]
+                 
+                 }
+                 ]
     
 }
