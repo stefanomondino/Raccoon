@@ -115,7 +115,7 @@ extension ViewModel: UICollectionViewDataSource {
                 multiplier: 1.0,
                 constant: width)
             cell.contentView.addConstraint(constraint)
-            parameters = StaticCellParameters(constraint: nil, cell:cell)
+            parameters = StaticCellParameters(constraint: constraint, cell:cell)
             self.staticCells![nib] = parameters as? AnyObject
         }
 
