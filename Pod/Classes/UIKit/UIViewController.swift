@@ -102,21 +102,21 @@ extension UIViewController {
                     self?.receivedError(error)
                 }
             })
-            vm.reloadAction?.isExecuting
-                .producer
-                .startWithResult({[weak self] (result) in
-                    if (result.value == true)  {
-                        self?.showLoader()
-                    }
-                    else {
-                        self?.hideLoader()
-                    }
-                })
+//            vm.reloadAction?.isExecuting
+//                .producer
+//                .startWithResult({[weak self] (result) in
+//                    if (result.value == true)  {
+//                        self?.showLoader()
+//                    }
+//                    else {
+//                        self?.hideLoader()
+//                    }
+//                })
         }
         
     }
     
     open func receivedError(_ error:NSError) {}
-    open func showLoader() {}
-    open func hideLoader() {}
+//    open func showLoader() {}
+//    open func hideLoader() {}
 }
