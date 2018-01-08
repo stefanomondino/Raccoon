@@ -90,7 +90,7 @@ extension UIViewController {
         return signal
     }
     
-    open func bindViewModel(_ viewModel:ViewModel?) {
+   @objc open func bindViewModel(_ viewModel:ViewModel?) {
         
         if let vm = viewModel
         {
