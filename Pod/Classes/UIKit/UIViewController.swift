@@ -13,8 +13,9 @@ import ReactiveSwift
 import Result
 
 
-@objc protocol UIViewControllerRaccoon {
+@objc public protocol UIViewControllerRaccoon {
     @objc func setViewModel(_ viewModel:ViewModel!)
+    @objc var viewModel:ViewModel {get set}
 }
 
 extension UIViewController {
@@ -90,11 +91,13 @@ extension UIViewController {
         return signal
     }
     
-   @objc open func bindViewModel(_ viewModel:ViewModel?) {
+    @objc open func bindViewModel(_ viewModel:ViewModel?) {
         
         if let vm = viewModel
         {
-            if self.responds(to: #selector(UIViewControllerRaccoon.setViewModel(_:))) {
+            if self.responds(to: #selector(setter: UIViewControllerRaccoon.viewModel)) {
+                self.perform(#selector(setter: UIViewControllerRaccoon.viewModel), with: viewModel!)
+            }else if self.responds(to: #selector(UIViewControllerRaccoon.setViewModel(_:))) {
                 self.perform(#selector(UIViewControllerRaccoon.setViewModel(_:)), with: vm)
             }
             vm.reloadAction?.errors.observeResult({[weak self] (result) in
@@ -102,21 +105,21 @@ extension UIViewController {
                     self?.receivedError(error)
                 }
             })
-//            vm.reloadAction?.isExecuting
-//                .producer
-//                .startWithResult({[weak self] (result) in
-//                    if (result.value == true)  {
-//                        self?.showLoader()
-//                    }
-//                    else {
-//                        self?.hideLoader()
-//                    }
-//                })
+            //            vm.reloadAction?.isExecuting
+            //                .producer
+            //                .startWithResult({[weak self] (result) in
+            //                    if (result.value == true)  {
+            //                        self?.showLoader()
+            //                    }
+            //                    else {
+            //                        self?.hideLoader()
+            //                    }
+            //                })
         }
         
     }
     
-    open func receivedError(_ error:NSError) {}
-//    open func showLoader() {}
-//    open func hideLoader() {}
+    @objc open func receivedError(_ error:NSError) {}
+    @objc open func showLoader() {}
+    @objc open func hideLoader() {}
 }
