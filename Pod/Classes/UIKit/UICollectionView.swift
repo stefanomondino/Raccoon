@@ -12,11 +12,8 @@ import ReactiveCocoa
 import Result
 import ObjectiveC
 
-
+@objc
 extension UICollectionView {
-    
-    
-    
     override open func bindViewModel(_ viewModel:ViewModel?) {
         if (viewModel != nil) {
         self.dataSource = viewModel
@@ -33,7 +30,7 @@ extension UICollectionView {
     
     
 }
-
+@objc
 extension UICollectionReusableView {
     /** This should be override whenever collectionView autosizing is enabled to specify custom logic to resize a viewModel-driven cell
      An example: a list item with multiline title and fixed-size image downloaded from the Internet. Title should be set inside bindViewModelForResize method, but the image should be downloaded only inside bindViewModel: method. TODO explain better
@@ -65,7 +62,7 @@ extension ViewModel: UICollectionViewDataSource {
         }
     }
     
-    open func registerNibsForCollectionView(_ collectionView:UICollectionView) {
+    @objc open func registerNibsForCollectionView(_ collectionView:UICollectionView) {
         for id in self.listIdentifiers() {
             collectionView.register(UINib.init(nibName: id, bundle: nil), forCellWithReuseIdentifier: id)
         }
@@ -124,7 +121,7 @@ extension ViewModel: UICollectionViewDataSource {
         return parameters?.cell
         
     }
-    open func autoSizeForItemAtIndexPath(_ indexPath:IndexPath, width:CGFloat) -> CGSize {
+   @objc open func autoSizeForItemAtIndexPath(_ indexPath:IndexPath, width:CGFloat) -> CGSize {
         let cell = self.staticCellForSizeAtIndexPath(indexPath, width: width)
         cell?.contentView.setNeedsLayout()
         cell?.contentView.layoutIfNeeded()
